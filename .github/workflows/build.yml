@@ -1,0 +1,43 @@
+name: Build E-Bike Rezerwacje
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+          - macos-latest
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+
+      - name: Pobierz kod
+        uses: actions/checkout@v4
+
+
+      - name: Instalacja Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+
+      - name: Instalacja paczek
+        run: npm install
+
+
+      - name: Budowanie aplikacji
+        run: npm run dist
+
+
+      - name: Zapisz gotowy program
+        uses: actions/upload-artifact@v4
+        with:
+          name: E-Bike-${{ matrix.os }}
+          path: release
