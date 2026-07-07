@@ -10,7 +10,7 @@
     "dev": "vite",
     "build": "vite build",
     "electron": "electron .",
-    "dist": "npm run build && electron-builder"
+    "dist": "npm run build && electron-builder --publish never"
   },
 
   "dependencies": {
